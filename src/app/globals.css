@@ -5,22 +5,52 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+
+
+@font-face {
+font-display: swap;
+font-family: 'merchant';
+font-style: normal;
+font-weight: 500;
+font-stretch: normal;
+unicode-range: U+0-10FFFF;
+src: url('https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F9ecfc610274ffffeef9a46a3d5507fd0de3c0fd0?generation=1773007083305299&alt=media') format('woff2');
+}
+
+@font-face {
+font-display: swap;
+font-family: 'monument';
+font-style: normal;
+font-weight: 500;
+font-stretch: normal;
+unicode-range: U+0-10FFFF;
+src: url('https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2Feb7bd72ffb3c4cecc7dc489d9a87b086cc3dc072?generation=1773007083291860&alt=media') format('woff2');
+}
+
+@font-face {
+font-display: swap;
+font-family: 'htc-hand';
+font-style: normal;
+font-weight: 500;
+font-stretch: normal;
+unicode-range: U+0-10FFFF;
+src: url('https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2Fa490b3fa99e7c3da6cd5e3bff6e66764039ea843?generation=1773007084724252&alt=media') format('woff2');
+}
+
+@font-face {
+font-display: swap;
+font-family: 'monument';
+font-style: italic;
+font-weight: 500;
+font-stretch: normal;
+unicode-range: U+0-10FFFF;
+src: url('https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F28c7958607c7946538f3ca1692a2d4680589b155?generation=1773007083300345&alt=media') format('woff2');
 }

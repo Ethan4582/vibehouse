@@ -27,7 +27,7 @@ export default async function BlogPage(props: { params: Promise<{ id: string }> 
    const randomLabel = extraMetadataLabel[Math.floor(Math.random() * extraMetadataLabel.length)];
 
    return (
-      <main className="min-h-screen bg-black text-white relative flex flex-col pt-12">
+      <main className="min-h-screen bg-black text-white relative flex flex-col pt-12 overflow-x-hidden max-w-full">
          {/* Navigation / Header */}
          <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-8 pointer-events-none mix-blend-difference font-merchant">
             <Link href="/" className="uppercase text-[12px] md:text-sm tracking-widest pointer-events-auto hover:text-[#00ff00] transition-colors border-b border-transparent hover:border-[#00ff00]">

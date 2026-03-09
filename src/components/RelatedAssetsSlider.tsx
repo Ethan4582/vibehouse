@@ -8,27 +8,23 @@ import { motion } from "framer-motion";
 export default function RelatedAssetsSlider({ assets }: { assets: Asset[] }) {
    const sliderRef = useRef<HTMLDivElement>(null);
 
-   // Simple smooth-scroll handling for mousewheel over the horizontal area
-   // Lenis handles vertical, but for horizontal sections we can translate wheel
+  
    useEffect(() => {
       const slider = sliderRef.current;
       if (!slider) return;
 
       const handleWheel = (e: WheelEvent) => {
-         // Only translate vertical scroll to horizontal if the user is scrolling natively
+       
          if (e.deltaY !== 0 && e.deltaX === 0) {
-            // We don't want to swallow vertical scroll completely unless we are at boundaries, 
-            // but for a true horizontal masonry/slider it's often nicer to just let it overflow nicely.
+            
          }
       };
 
-      // Optional: uncomment to capture vertical wheel for horizontal scrolling
-      // slider.addEventListener("wheel", handleWheel, { passive: false });
-      // return () => slider.removeEventListener("wheel", handleWheel);
+  
    }, []);
 
    return (
-      <div className="w-full pb-20">
+      <div className="w-fulloverflow-x-hidden pb-20">
          <div className="px-6 md:px-12 mb-8 flex justify-between items-end border-b border-white/10 pb-6">
             <h3 className="text-xl md:text-3xl font-htc-hand tracking-wide">More from the Archive</h3>
             <span className="text-[10px] uppercase tracking-widest text-white/50 font-merchant">Swipe to explore</span>
@@ -40,7 +36,7 @@ export default function RelatedAssetsSlider({ assets }: { assets: Asset[] }) {
          >
             {assets.map((asset, index) => (
                <Link href={`/blog/${asset.id}`} key={asset.id} className="snap-start shrink-0 group">
-                  {/* Card container matching the visual style of ScrollGallery somewhat (portrait) */}
+                 
                   <motion.div
                      initial={{ opacity: 0, y: 20 }}
                      whileInView={{ opacity: 1, y: 0 }}
@@ -66,7 +62,7 @@ export default function RelatedAssetsSlider({ assets }: { assets: Asset[] }) {
                         />
                      ) : null}
 
-                     {/* Overlay gradient & text */}
+                    
                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                      <div className="absolute bottom-0 left-0 w-full p-4 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 font-merchant">

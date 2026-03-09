@@ -65,8 +65,7 @@ const layoutData: LayoutItem[] = [
 
 const CANVAS_HEIGHT_VH = 1800;
 
-
-function ParallaxImage({ item }: { item: LayoutItem }) {
+function ParallaxImage({ item, index, mobileLayout }: { item: LayoutItem; index: number; mobileLayout: { top: number; left: number; width: number; height: number } }) {
    const scrollRef = useRef<HTMLDivElement>(null);
    const rotateRef = useRef<HTMLDivElement>(null);
    const videoRef = useRef<HTMLVideoElement>(null);
@@ -147,15 +146,21 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
 
       <motion.div
          ref={scrollRef}
+         className="absolute responsive-gallery-card"
          style={{
-            position: "absolute",
-            left: `${item.x}vw`,
-            top: `${topVh}vh`,
-            width: `${item.w}vw`,
-            height: `${item.h}vh`,
+            "--desktop-left": `${item.x}vw`,
+            "--desktop-top": `${topVh}vh`,
+            "--desktop-width": `${item.w}vw`,
+            "--desktop-height": `${item.h}vh`,
+
+            "--mobile-left": `${mobileLayout.left}vw`,
+            "--mobile-top": `${mobileLayout.top}vh`,
+            "--mobile-width": `${mobileLayout.width}vw`,
+            "--mobile-height": `${mobileLayout.height}vh`,
+
             y: scrollY,
             zIndex: isHovered ? 10 : 1,
-         }}
+         } as any}
       >
 
          <div
@@ -227,18 +232,52 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
 
 
 export default function ScrollGallery() {
+   const mobileLayouts = layoutData.reduce((acc, item, i) => {
+      // Alternate between wide landscape and vertical portrait on mobile
+      const isLandscape = i % 2 === 0;
+      const mWidth = isLandscape ? 88 : 66; // Landscape wide, portrait narrow
+      const mHeight = isLandscape ? 34 : 54; // Landscape short, portrait tall
+      const mLeft = isLandscape ? 6 : 28; // Portrait pushed to right, wide stays centered
+      const mGap = 6;
+
+      const top = i === 0 ? 0 : acc[i - 1].top + acc[i - 1].height + mGap;
+      acc.push({ top, left: mLeft, width: mWidth, height: mHeight });
+      return acc;
+   }, [] as { top: number; left: number; width: number; height: number; }[]);
+
+   const mobileTotalHeight = mobileLayouts.length > 0 ? mobileLayouts[mobileLayouts.length - 1].top + mobileLayouts[mobileLayouts.length - 1].height + 20 : 0;
+
    return (
       <div style={{ paddingTop: "15vh", paddingBottom: "20vh" }} className="w-full">
+         <style dangerouslySetInnerHTML={{
+            __html: `
+            .responsive-gallery-container { height: var(--mobile-height); }
+            .responsive-gallery-card { 
+               left: var(--mobile-left); 
+               top: var(--mobile-top); 
+               width: var(--mobile-width); 
+               height: var(--mobile-height); 
+            }
+            @media (min-width: 640px) {
+               .responsive-gallery-container { height: var(--desktop-height); }
+               .responsive-gallery-card { 
+                  left: var(--desktop-left); 
+                  top: var(--desktop-top); 
+                  width: var(--desktop-width); 
+                  height: var(--desktop-height); 
+               }
+            }
+         `}} />
+
          <div
+            className="w-full relative overflow-hidden responsive-gallery-container"
             style={{
-               position: "relative",
-               width: "100%",
-               height: `${CANVAS_HEIGHT_VH}vh`,
-               overflow: "hidden",
-            }}
+               "--desktop-height": `${CANVAS_HEIGHT_VH}vh`,
+               "--mobile-height": `${mobileTotalHeight}vh`,
+            } as React.CSSProperties}
          >
             {layoutData.map((item, i) => (
-               <ParallaxImage key={item.assetId + i} item={item} />
+               <ParallaxImage key={item.assetId + i} item={item} index={i} mobileLayout={mobileLayouts[i]} />
             ))}
          </div>
       </div>

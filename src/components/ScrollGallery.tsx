@@ -5,7 +5,8 @@ import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 import { images } from "../lib/assetData";
 
 const imageData: {
-   src: string;
+   src?: string;
+   video?: string;
    x: number;      // vw — left position from screen left
    y: number;      // vh — top position in canvas
    w: number;      // vw — image width
@@ -17,8 +18,8 @@ const imageData: {
    time: string;
 }[] = [
       { src: images[1], x: 8, y: 8, w: 40, h: 48, rotate: -6, mt: 0, mb: 5, label: "NEON STREET DRIP", time: "00:03:22" },
-      { src: images[0], x: 46, y: 10, w: 44, h: 48, rotate: 4, mt: 30, mb: 5, label: "TOKYO MIDNIGHT DRIVE", time: "00:02:41" },
-      { src: images[2], x: 1, y: 86, w: 42, h: 48, rotate: 6, mt: 0, mb: 0, label: "ROOFTOP CITY VIBES", time: "00:01:58" },
+      { src: images[0], video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", x: 46, y: 10, w: 44, h: 48, rotate: 4, mt: 30, mb: 5, label: "TOKYO MIDNIGHT DRIVE", time: "00:02:41" },
+      { video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", x: 1, y: 86, w: 42, h: 48, rotate: 6, mt: 0, mb: 0, label: "ROOFTOP CITY VIBES", time: "00:01:58" },
       { src: images[3], x: 42, y: 144, w: 20, h: 52, rotate: 10, mt: 0, mb: 10, label: "MILAN STREET STYLE", time: "00:02:15" },
       { src: images[4], x: 52, y: 220, w: 44, h: 48, rotate: -10, mt: 0, mb: 10, label: "SUPERCAR GARAGE NIGHT", time: "00:03:05" },
       { src: images[5], x: 2, y: 240, w: 44, h: 48, rotate: 6, mt: 0, mb: 5, label: "PARIS RUNWAY DROP", time: "00:02:33" },
@@ -60,6 +61,7 @@ const CANVAS_HEIGHT_VH = 1780;
 
 function ParallaxImage({ img }: { img: typeof imageData[0] }) {
    const ref = useRef<HTMLDivElement>(null);
+   const videoRef = useRef<HTMLVideoElement>(null);
    const [isHovered, setIsHovered] = useState(false);
 
    const { scrollYProgress } = useScroll({
@@ -76,18 +78,31 @@ function ParallaxImage({ img }: { img: typeof imageData[0] }) {
    // Subtle upward drift — ONLY while the image is moving through the viewport
    const scrollY = useTransform(smoothProgress, [0, 1], [10, -10]);
 
-   // Rotation straightens out to 0 degrees exactly when passing the middle of the viewport
-   const rotation = useTransform(smoothProgress, [0, 0.5, 1], [img.rotate, 0, 0]);
+   // Images have a slight tilt by default, making them dynamic instead of completely straight.
+   const rotation = useTransform(smoothProgress, [0, 0.5, 1], [img.rotate * 1.5, img.rotate, img.rotate * 0.5]);
 
    // Final top = y (base) + mt (extra space above)
    const topVh = img.y + img.mt;
+
+   const hasVideo = !!img.video;
+   const hasImage = !!img.src;
 
    return (
       <motion.div
          ref={ref}
          className="cursor-pointer" // Removed tailwind group, handling hover with React state
-         onPointerEnter={() => setIsHovered(true)}
-         onPointerLeave={() => setIsHovered(false)}
+         onPointerEnter={() => {
+            setIsHovered(true);
+            if (videoRef.current) {
+               videoRef.current.play().catch(() => { });
+            }
+         }}
+         onPointerLeave={() => {
+            setIsHovered(false);
+            if (videoRef.current) {
+               videoRef.current.pause();
+            }
+         }}
          style={{
             position: "absolute",
             left: `${img.x}vw`,
@@ -99,23 +114,40 @@ function ParallaxImage({ img }: { img: typeof imageData[0] }) {
             zIndex: isHovered ? 10 : 1, // Elevate z-index on hover so strip overlaps other elements
          }}
       >
-         {/* eslint-disable-next-line @next/next/no-img-element */}
-         <img
-            src={img.src}
-            alt={img.label}
-            style={{
-               width: "100%",
-               height: "100%", // Fill the height defined in h
-               display: "block",
-               objectFit: "cover", // Ensure image fills the box without stretching
-            }}
-            loading="lazy"
-         />
+         {/* Media Container (Handles Image/Video Overflow & Scaling) */}
+         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+            {hasImage && (
+               // eslint-disable-next-line @next/next/no-img-element
+               <img
+                  src={img.src}
+                  alt={img.label}
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
+                  style={{
+                     transform: isHovered && !hasVideo ? "scale(1.05)" : "scale(1)",
+                     opacity: hasVideo && isHovered ? 0 : 1,
+                  }}
+                  loading="lazy"
+               />
+            )}
+
+            {hasVideo && (
+               <video
+                  ref={videoRef}
+                  src={img.video}
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+                  style={{
+                     opacity: hasImage ? (isHovered ? 1 : 0) : 1,
+                  }}
+               />
+            )}
+         </div>
 
          {/* Pure CSS Grid animated Hover Strip. Fixes framer-motion height calculation flash bugs. calc(100%-1px) seals any tiny subpixel gap */}
          <div
-            style={{ fontFamily: "'merchant', sans-serif" }}
-            className="absolute top-[calc(100%-1px)] left-0 w-full bg-black text-white pointer-events-none"
+            className="absolute top-[calc(100%-1px)] left-0 w-full bg-black text-white pointer-events-none font-merchant"
          >
             <div
                className={`grid transition-all duration-300 ease-out ${isHovered ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}

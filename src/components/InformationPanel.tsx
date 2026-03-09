@@ -21,8 +21,7 @@ export default function InformationPanel() {
 
             {/* The Badge - Increased gap by adjusting margin */}
             <div
-               className="bg-[#ff5252] text-black text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.15em] px-2 py-[1px] border border-black/5 ml-2 mt-4 leading-none"
-               style={{ fontFamily: "'merchant', monospace" }}
+               className="bg-[#ff5252] text-black text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.15em] px-2 py-[1px] border border-black/5 ml-2 mt-4 leading-none font-merchant"
             >
                INFORMATION
             </div>
@@ -43,18 +42,17 @@ export default function InformationPanel() {
             {/* Close Button */}
             <button
                onClick={() => setIsOpen(false)}
-               className="absolute top-10 right-12 text-[10px] sm:text-[11px] font-bold text-gray-300 hover:text-black transition-colors z-10"
-               style={{ fontFamily: "'merchant', monospace" }}
+               className="absolute top-10 right-12 text-[10px] sm:text-[11px] font-bold text-gray-300 hover:text-black transition-colors z-10 font-merchant"
                aria-label="Close Information Panel"
             >
                [X]
             </button>
 
             {/* Scrollable Content Area */}
-            <div className="flex-1 overflow-y-auto pt-20 pb-0 px-10 sm:px-14 hide-scrollbar" style={{ fontFamily: "'merchant', monospace", fontSize: "12px" }}>
+            <div className="flex-1 overflow-y-auto pt-20 pb-0 px-10 sm:px-14 hide-scrollbar font-merchant text-[12px]">
 
                {/* Header Area */}
-               <h2 className="text-2xl sm:text-[24px] mb-12 tracking-tight text-gray-900 leading-none" style={{ fontFamily: "'htc-hand', cursive" }}>
+               <h2 className="text-2xl sm:text-[24px] mb-12 tracking-tight text-gray-900 leading-none font-htc-hand">
                   re•bel•lious in•gen•ious <span className="bg-[#00ff00] text-black px-1.5 mx-0.5">none</span>•quiv•a•lent
                </h2>
 

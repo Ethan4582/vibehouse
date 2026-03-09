@@ -11,53 +11,49 @@ const imageData: {
    w: number;      // vw — image width
    h: number;      // vh — image height (thickness)
    rotate: number; // deg — START rotation angle
-   rotateTo: number; // deg — END rotation angle
    mt: number;     // vh — extra margin/space ABOVE this image (added to y when rendering)
    mb: number;     // vh — documents desired space BELOW (add to y of next image manually)
    label: string;
    time: string;
 }[] = [
-{ src: images[1], x: 8, y: 8, w: 40, h: 48, rotate: -6, rotateTo: -2, mt: 0, mb: 5, label: "NEON STREET DRIP", time: "00:03:22" },
-{ src: images[0], x: 46, y: 10, w: 44, h: 48, rotate: 4, rotateTo: -4, mt: 30, mb: 5, label: "TOKYO MIDNIGHT DRIVE", time: "00:02:41" },
-{ src: images[2], x: 1, y: 86, w: 42, h: 48, rotate: 6, rotateTo: -1, mt: 0, mb: 0, label: "ROOFTOP CITY VIBES", time: "00:01:58" },
-{ src: images[3], x: 42, y: 144, w: 20, h: 52, rotate: 10, rotateTo: -4, mt: 0, mb: 10, label: "MILAN STREET STYLE", time: "00:02:15" },
-{ src: images[4], x: 52, y: 220, w: 44, h: 48, rotate: -10, rotateTo: 2, mt: 0, mb: 10, label: "SUPERCAR GARAGE NIGHT", time: "00:03:05" },
-{ src: images[5], x: 2, y: 240, w: 44, h: 48, rotate: 6, rotateTo: -1, mt: 0, mb: 5, label: "PARIS RUNWAY DROP", time: "00:02:33" },
-{ src: images[6], x: 66, y: 280, w: 20, h: 49, rotate: -2, rotateTo: -2, mt: 0, mb: 10, label: "LATE NIGHT COFFEE CLUB", time: "00:01:52" },
-{ src: images[7], x: 14, y: 320, w: 44, h: 48, rotate: 6, rotateTo: 2, mt: 0, mb: 10, label: "VINTAGE PORSCHE RUN", time: "00:02:44" },
-{ src: images[8], x: 56, y: 367, w: 26, h: 49, rotate: -8, rotateTo: 3, mt: 0, mb: 0, label: "SOHO STREET MODEL", time: "00:01:39" },
-{ src: images[9], x: 26, y: 430, w: 20, h: 50, rotate: -8, rotateTo: -2, mt: 0, mb: 10, label: "LUXURY NIGHT GARAGE", time: "00:02:58" },
-{ src: images[10], x: 52, y: 465, w: 44, h: 48, rotate: -10, rotateTo: -1, mt: 0, mb: 0, label: "DESERT LAMBO SESSION", time: "00:03:10" },
-{ src: images[11], x: 12, y: 510, w: 26, h: 48, rotate: -8, rotateTo: -2, mt: 0, mb: 10, label: "BROOKLYN FASHION WALK", time: "00:01:57" },
-{ src: images[11], x: 29, y: 560, w: 44, h: 48, rotate: -4, rotateTo: -1, mt: 6, mb: 10, label: "CITY LIGHTS PORTRAIT", time: "00:02:06" },
-{ src: images[11], x: 61, y: 630, w: 20, h: 49, rotate: -4, rotateTo: -1, mt: 6, mb: 10, label: "NIGHT BIKE CRUISE", time: "00:02:18" },
-{ src: images[12], x: 1, y: 650, w: 42, h: 48, rotate: 8, rotateTo: -1, mt: 0, mb: 0, label: "LOS ANGELES SUNSET FIT", time: "00:02:36" },
-{ src: images[13], x: 51, y: 710, w: 46, h: 48, rotate: 14, rotateTo: -1, mt: 0, mb: 0, label: "STREET CULTURE DROP", time: "00:02:09" },
-{ src: images[14], x: 31, y: 760, w: 20, h: 49, rotate: -6, rotateTo: 0, mt: 6, mb: 10, label: "TOKYO DRIFT NIGHT", time: "00:01:48" },
-{ src: images[15], x: 61, y: 810, w: 20, h: 49, rotate: -6, rotateTo: 0, mt: 6, mb: 10, label: "URBAN ROOFTOP SHOOT", time: "00:02:21" },
-{ src: images[16], x: 8, y: 880, w: 44, h: 48, rotate: 10, rotateTo: -1, mt: 0, mb: 0, label: "FERRARI CLUB NIGHT", time: "00:02:43" },
-{ src: images[17], x: 49, y: 910, w: 46, h: 46, rotate: 10, rotateTo: -1, mt: 0, mb: 0, label: "MODEL OFF DUTY", time: "00:01:54" },
-{ src: images[18], x: 16, y: 950, w: 20, h: 49, rotate: -4, rotateTo: 0, mt: 6, mb: 10, label: "CITY BIKE LIFESTYLE", time: "00:02:02" },
-{ src: images[19], x: 28, y: 1020, w: 44, h: 48, rotate: -8, rotateTo: -6, mt: 0, mb: 0, label: "NEON DISTRICT WALK", time: "00:02:27" },
-{ src: images[20], x: 52, y: 1080, w: 44, h: 48, rotate: -10, rotateTo: 2, mt: 0, mb: 10, label: "MIDNIGHT ROLLS ROYCE", time: "00:03:11" },
-{ src: images[21], x: 2, y: 1100, w: 44, h: 48, rotate: 6, rotateTo: -1, mt: 0, mb: 5, label: "SUMMER STREET DRIP", time: "00:01:46" },
-{ src: images[22], x: 62, y: 1160, w: 28, h: 49, rotate: -10, rotateTo: 2, mt: 0, mb: 10, label: "HYPE CLUB ARRIVAL", time: "00:02:12" },
-{ src: images[23], x: 28, y: 1200, w: 20, h: 49, rotate: -10, rotateTo: 2, mt: 0, mb: 10, label: "CITY PORTRAIT MODE", time: "00:01:59" },
-{ src: images[24], x: 46, y: 1250, w: 44, h: 48, rotate: -6, rotateTo: -1, mt: 0, mb: 5, label: "LUXURY HOTEL NIGHT", time: "00:02:38" },
-{ src: images[25], x: 22, y: 1310, w: 20, h: 49, rotate: 6, rotateTo: 2, mt: 0, mb: 10, label: "PARIS COFFEE FIT", time: "00:01:44" },
-{ src: images[26], x: 61, y: 1350, w: 20, h: 49, rotate: 6, rotateTo: 1, mt: 0, mb: 10, label: "NIGHT STREET PORSCHE", time: "00:02:53" },
-{ src: images[27], x: 2, y: 1410, w: 44, h: 48, rotate: -10, rotateTo: 2, mt: 0, mb: 10, label: "URBAN SKYLINE WALK", time: "00:02:07" },
-
-{ src: images[28], x: 18, y: 1460, w: 44, h: 48, rotate: 6, rotateTo: -2, mt: 0, mb: 10, label: "MIDNIGHT LAMBO RUN", time: "00:02:58" },
-{ src: images[29], x: 60, y: 1495, w: 20, h: 49, rotate: -8, rotateTo: 1, mt: 6, mb: 10, label: "TOKYO STREET FIT", time: "00:01:42" },
-{ src: images[30], x: 6, y: 1540, w: 42, h: 48, rotate: 10, rotateTo: -3, mt: 0, mb: 5, label: "NEON NIGHT DRIVE", time: "00:03:05" },
-{ src: images[31], x: 52, y: 1580, w: 44, h: 48, rotate: -6, rotateTo: 2, mt: 0, mb: 10, label: "PARIS RUNWAY VIBES", time: "00:02:11" },
-{ src: images[32], x: 26, y: 1635, w: 20, h: 50, rotate: -4, rotateTo: -1, mt: 0, mb: 10, label: "VINTAGE PORSCHE CLUB", time: "00:02:37" },
-{ src: images[33], x: 64, y: 1680, w: 26, h: 49, rotate: 8, rotateTo: -2, mt: 0, mb: 0, label: "SOHO MODEL WALK", time: "00:01:55" },
-{ src: images[34], x: 10, y: 1720, w: 44, h: 48, rotate: -10, rotateTo: 3, mt: 0, mb: 10, label: "NIGHT CITY DRIP", time: "00:02:49" },
-
-
-];
+      { src: images[1], x: 8, y: 8, w: 40, h: 48, rotate: -6, mt: 0, mb: 5, label: "NEON STREET DRIP", time: "00:03:22" },
+      { src: images[0], x: 46, y: 10, w: 44, h: 48, rotate: 4, mt: 30, mb: 5, label: "TOKYO MIDNIGHT DRIVE", time: "00:02:41" },
+      { src: images[2], x: 1, y: 86, w: 42, h: 48, rotate: 6, mt: 0, mb: 0, label: "ROOFTOP CITY VIBES", time: "00:01:58" },
+      { src: images[3], x: 42, y: 144, w: 20, h: 52, rotate: 10, mt: 0, mb: 10, label: "MILAN STREET STYLE", time: "00:02:15" },
+      { src: images[4], x: 52, y: 220, w: 44, h: 48, rotate: -10, mt: 0, mb: 10, label: "SUPERCAR GARAGE NIGHT", time: "00:03:05" },
+      { src: images[5], x: 2, y: 240, w: 44, h: 48, rotate: 6, mt: 0, mb: 5, label: "PARIS RUNWAY DROP", time: "00:02:33" },
+      { src: images[6], x: 66, y: 280, w: 20, h: 49, rotate: -2, mt: 0, mb: 10, label: "LATE NIGHT COFFEE CLUB", time: "00:01:52" },
+      { src: images[7], x: 14, y: 320, w: 44, h: 48, rotate: 6, mt: 0, mb: 10, label: "VINTAGE PORSCHE RUN", time: "00:02:44" },
+      { src: images[8], x: 56, y: 367, w: 26, h: 49, rotate: -8, mt: 0, mb: 0, label: "SOHO STREET MODEL", time: "00:01:39" },
+      { src: images[9], x: 26, y: 430, w: 20, h: 50, rotate: -8, mt: 0, mb: 10, label: "LUXURY NIGHT GARAGE", time: "00:02:58" },
+      { src: images[10], x: 52, y: 465, w: 44, h: 48, rotate: -10, mt: 0, mb: 0, label: "DESERT LAMBO SESSION", time: "00:03:10" },
+      { src: images[11], x: 12, y: 510, w: 26, h: 48, rotate: -8, mt: 0, mb: 10, label: "BROOKLYN FASHION WALK", time: "00:01:57" },
+      { src: images[11], x: 29, y: 560, w: 44, h: 48, rotate: -4, mt: 6, mb: 10, label: "CITY LIGHTS PORTRAIT", time: "00:02:06" },
+      { src: images[11], x: 61, y: 630, w: 20, h: 49, rotate: -4, mt: 6, mb: 10, label: "NIGHT BIKE CRUISE", time: "00:02:18" },
+      { src: images[12], x: 1, y: 650, w: 42, h: 48, rotate: 8, mt: 0, mb: 0, label: "LOS ANGELES SUNSET FIT", time: "00:02:36" },
+      { src: images[13], x: 51, y: 710, w: 46, h: 48, rotate: 14, mt: 0, mb: 0, label: "STREET CULTURE DROP", time: "00:02:09" },
+      { src: images[14], x: 31, y: 760, w: 20, h: 49, rotate: -6, mt: 6, mb: 10, label: "TOKYO DRIFT NIGHT", time: "00:01:48" },
+      { src: images[15], x: 61, y: 810, w: 20, h: 49, rotate: -6, mt: 6, mb: 10, label: "URBAN ROOFTOP SHOOT", time: "00:02:21" },
+      { src: images[16], x: 8, y: 880, w: 44, h: 48, rotate: 10, mt: 0, mb: 0, label: "FERRARI CLUB NIGHT", time: "00:02:43" },
+      { src: images[17], x: 49, y: 910, w: 46, h: 46, rotate: 10, mt: 0, mb: 0, label: "MODEL OFF DUTY", time: "00:01:54" },
+      { src: images[18], x: 16, y: 950, w: 20, h: 49, rotate: -4, mt: 6, mb: 10, label: "CITY BIKE LIFESTYLE", time: "00:02:02" },
+      { src: images[19], x: 28, y: 1020, w: 44, h: 48, rotate: -8, mt: 0, mb: 0, label: "NEON DISTRICT WALK", time: "00:02:27" },
+      { src: images[20], x: 52, y: 1080, w: 44, h: 48, rotate: -10, mt: 0, mb: 10, label: "MIDNIGHT ROLLS ROYCE", time: "00:03:11" },
+      { src: images[21], x: 2, y: 1100, w: 44, h: 48, rotate: 6, mt: 0, mb: 5, label: "SUMMER STREET DRIP", time: "00:01:46" },
+      { src: images[22], x: 62, y: 1160, w: 28, h: 49, rotate: -10, mt: 0, mb: 10, label: "HYPE CLUB ARRIVAL", time: "00:02:12" },
+      { src: images[23], x: 28, y: 1200, w: 20, h: 49, rotate: -10, mt: 0, mb: 10, label: "CITY PORTRAIT MODE", time: "00:01:59" },
+      { src: images[24], x: 46, y: 1250, w: 44, h: 48, rotate: -6, mt: 0, mb: 5, label: "LUXURY HOTEL NIGHT", time: "00:02:38" },
+      { src: images[25], x: 22, y: 1310, w: 20, h: 49, rotate: 6, mt: 0, mb: 10, label: "PARIS COFFEE FIT", time: "00:01:44" },
+      { src: images[26], x: 61, y: 1350, w: 20, h: 49, rotate: 6, mt: 0, mb: 10, label: "NIGHT STREET PORSCHE", time: "00:02:53" },
+      { src: images[27], x: 2, y: 1410, w: 44, h: 48, rotate: -10, mt: 0, mb: 10, label: "URBAN SKYLINE WALK", time: "00:02:07" },
+      { src: images[28], x: 18, y: 1460, w: 44, h: 48, rotate: 6, mt: 0, mb: 10, label: "MIDNIGHT LAMBO RUN", time: "00:02:58" },
+      { src: images[29], x: 60, y: 1495, w: 20, h: 49, rotate: -8, mt: 6, mb: 10, label: "TOKYO STREET FIT", time: "00:01:42" },
+      { src: images[30], x: 6, y: 1540, w: 42, h: 48, rotate: 10, mt: 0, mb: 5, label: "NEON NIGHT DRIVE", time: "00:03:05" },
+      { src: images[31], x: 52, y: 1580, w: 44, h: 48, rotate: -6, mt: 0, mb: 10, label: "PARIS RUNWAY VIBES", time: "00:02:11" },
+      { src: images[32], x: 26, y: 1635, w: 20, h: 50, rotate: -4, mt: 0, mb: 10, label: "VINTAGE PORSCHE CLUB", time: "00:02:37" },
+      { src: images[33], x: 64, y: 1680, w: 26, h: 49, rotate: 8, mt: 0, mb: 0, label: "SOHO MODEL WALK", time: "00:01:55" },
+      { src: images[34], x: 10, y: 1720, w: 44, h: 48, rotate: -10, mt: 0, mb: 10, label: "NIGHT CITY DRIP", time: "00:02:49" },
+   ];
 
 // Total canvas height in vh — bump this up if images overflow the bottom
 const CANVAS_HEIGHT_VH = 1780;

@@ -6,19 +6,20 @@ import { useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assets, getAsset } from "../lib/assetData";
+import { useHoverStore } from "./HoverProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type LayoutItem = {
-   assetId: string;  // references assets[id] in assetData.ts
-   x: number;        // vw — left position from screen left
-   y: number;        // vh — top position in canvas
-   w: number;        // vw — image width
-   h: number;        // vh — image height (thickness)
-   rotate: number;   // deg — rotation when ENTERING viewport (top/bottom)
-   rotateTo: number; // deg — rotation when at CENTER of viewport (natural/resting)
-   mt: number;       // vh — extra margin/space ABOVE this image
-   mb: number;       // vh — documents desired space BELOW
+   assetId: string;
+   x: number;
+   y: number;
+   w: number;
+   h: number;
+   rotate: number;
+   rotateTo: number;
+   mt: number;
+   mb: number;
 };
 
 const layoutData: LayoutItem[] = [
@@ -69,6 +70,7 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
    const rotateRef = useRef<HTMLDivElement>(null);
    const videoRef = useRef<HTMLVideoElement>(null);
    const [isHovered, setIsHovered] = useState(false);
+   const { setGlobalHovered } = useHoverStore();
 
    const asset = getAsset(item.assetId);
    const hasImage = !!(asset?.image);
@@ -159,9 +161,11 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
             className="relative w-full h-full cursor-pointer"
             onPointerEnter={() => {
                setIsHovered(true);
+               setGlobalHovered(true);
             }}
             onPointerLeave={() => {
                setIsHovered(false);
+               setGlobalHovered(false);
             }}
          >
 
@@ -218,7 +222,7 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
 
 export default function ScrollGallery() {
    return (
-      <div style={{ backgroundColor: "#ffffff", paddingTop: "15vh", paddingBottom: "20vh" }}>
+      <div style={{ paddingTop: "15vh", paddingBottom: "20vh" }} className="w-full">
          <div
             style={{
                position: "relative",

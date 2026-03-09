@@ -1,10 +1,3 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Asset Registry — all media lives here, referenced by ID
-// Video behavior:
-// - image & video defined: Image shown by default, fades to video on hover
-// - video only defined: Video shown immediately and plays natively
-// - image only defined: Image shown, scales up subtly on hover
-// ─────────────────────────────────────────────────────────────────────────────
 
 export type Asset = {
    id: string;

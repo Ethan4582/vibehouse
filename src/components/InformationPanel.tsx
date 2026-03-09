@@ -12,7 +12,7 @@ export default function InformationPanel() {
          {/* Trigger Button */}
          <button
             onClick={() => setIsOpen(true)}
-            className="fixed top-8 left-8 z-[60] group flex items-start gap-0 transition-transform active:scale-95"
+            className="fixed top-2 left-2 z-[60] group flex items-start gap-0 transition-transform active:scale-95"
             aria-label="Open Information Panel"
          >
             {/* Massive Emoji - reduced size */}
@@ -35,7 +35,7 @@ export default function InformationPanel() {
          {/* Contact Button */}
          <a
             href="https://x.com/SinghAshir65848"
-            className={`fixed top-[46px] right-8 z-[60] text-[10px] sm:text-[12px] font-medium uppercase tracking-[0.15em] px-3 py-1 rounded-md border leading-none font-merchant transition-all duration-700 hover:scale-105 active:scale-95 ${isGlobalHovered
+            className={`fixed top-[24px] right-8 z-[60] text-[10px] sm:text-[12px] font-medium uppercase tracking-[0.15em] px-3 py-1 rounded-md border leading-none font-merchant transition-all duration-700 hover:scale-105 active:scale-95 ${isGlobalHovered
                   ? "bg-transparent text-[#ff75d6] border-[#ff75d6]"
                   : "bg-[#ff75d6] text-black border-black/5"
                }`}

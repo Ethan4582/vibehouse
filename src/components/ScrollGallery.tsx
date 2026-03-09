@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useSpring, motion } from "framer-motion";
 import { useScroll, useTransform } from "framer-motion";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assets, getAsset } from "../lib/assetData";
@@ -71,6 +72,7 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
    const videoRef = useRef<HTMLVideoElement>(null);
    const [isHovered, setIsHovered] = useState(false);
    const { setGlobalHovered } = useHoverStore();
+   const router = useRouter();
 
    const asset = getAsset(item.assetId);
    const hasImage = !!(asset?.image);
@@ -159,6 +161,10 @@ function ParallaxImage({ item }: { item: LayoutItem }) {
          <div
             ref={rotateRef}
             className="relative w-full h-full cursor-pointer"
+            onClick={() => {
+               setGlobalHovered(false); // Reset hover state on navigation
+               router.push(`/blog/${item.assetId}`);
+            }}
             onPointerEnter={() => {
                setIsHovered(true);
                setGlobalHovered(true);
